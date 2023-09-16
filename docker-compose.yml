@@ -1,0 +1,23 @@
+version: '3'
+services:
+  postgres_db:
+    image: postgres:alpine
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: modp
+      POSTGRES_PASSWORD: modp
+      POSTGRES_HOST_AUTH_METHOD: trust
+  redis:
+    image: redis:alpine
+    restart: on-failure
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+volumes:
+  db-data:
+  redis-data:
